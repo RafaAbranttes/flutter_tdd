@@ -3,6 +3,7 @@ import 'package:flutter_tdd_study/domain/entities/account_entity.dart';
 import 'package:flutter_tdd_study/domain/helpers/helpers.dart';
 import 'package:flutter_tdd_study/domain/usecases/usecases.dart';
 import '../http/http.dart';
+import '../models/models.dart';
 
 class RemoteAuthentication {
   final HttpClient httpClient;
@@ -20,7 +21,7 @@ class RemoteAuthentication {
         method: 'post',
         body: RemoteAuthenticationParams.fromDomain(params).toJson(),
       );
-      return AccountEntity.fromJson(httpReponse);
+      return RemoteAccounttModel.fromJson(httpReponse).toEntity();
     } on HttpError catch (error) {
       throw error == HttpError.unauthorised
           ? DomainError.invalidCredentails
