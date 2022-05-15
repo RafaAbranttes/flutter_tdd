@@ -23,6 +23,17 @@ void main() {
   });
 
   test('Should call HttpCliente with correct values', () async {
+    final accessToken = faker.guid.guid();
+    when(
+      httpClient.request(
+        url: anyNamed("url"),
+        method: anyNamed("method"),
+        body: anyNamed("body"),
+      ),
+    ).thenAnswer((realInvocation) async => {
+          'accessToken': accessToken,
+          'name': faker.person.name(),
+        });
     final params = AuthenticationParams(
         email: faker.internet.email(), secret: faker.internet.password());
     await sut.auth(params);
@@ -89,5 +100,26 @@ void main() {
     final future = sut.auth(params);
 
     expect(future, throwsA(DomainError.invalidCredentails));
+  });
+
+  test('Should return an Account if HttpClient return 200', () async {
+    final accessToken = faker.guid.guid();
+    when(
+      httpClient.request(
+        url: anyNamed("url"),
+        method: anyNamed("method"),
+        body: anyNamed("body"),
+      ),
+    ).thenAnswer((realInvocation) async => {
+          'accessToken': accessToken,
+          'name': faker.person.name(),
+        });
+
+    final account = await sut.auth(params);
+
+    expect(
+      account.token,
+      accessToken,
+    );
   });
 }
