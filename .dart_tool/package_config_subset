@@ -106,6 +106,10 @@ glob
 2.14
 file:///usr/local/Caskroom/flutter/3.0.1/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.0.2/
 file:///usr/local/Caskroom/flutter/3.0.1/flutter/.pub-cache/hosted/pub.dartlang.org/glob-2.0.2/lib/
+http
+2.14
+file:///usr/local/Caskroom/flutter/3.0.1/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/
+file:///usr/local/Caskroom/flutter/3.0.1/flutter/.pub-cache/hosted/pub.dartlang.org/http-0.13.4/lib/
 http_multi_server
 2.12
 file:///usr/local/Caskroom/flutter/3.0.1/flutter/.pub-cache/hosted/pub.dartlang.org/http_multi_server-3.0.1/
