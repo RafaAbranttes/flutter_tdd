@@ -36,6 +36,8 @@ class HttpAdapter implements HttpClient {
                 ? throw HttpError.badRequest
                 : response.statusCode == 401
                     ? throw HttpError.unauthorised
-                    : throw HttpError.serverError;
+                    : response.statusCode == 403
+                        ? throw HttpError.forbidden
+                        : throw HttpError.serverError;
   }
 }

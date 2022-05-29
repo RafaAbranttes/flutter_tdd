@@ -168,9 +168,21 @@ void main() {
       },
     );
 
-    
+    test(
+      'should return ForbiddenError if post returns 403',
+      () async {
+        mockResponse(403);
 
-        test(
+        final future = sut.request(
+          url: url,
+          method: 'post',
+        );
+
+        expect(future, throwsA(HttpError.forbidden));
+      },
+    );
+
+    test(
       'should return ServertError if post returns 500',
       () async {
         mockResponse(500);
