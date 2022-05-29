@@ -20,6 +20,23 @@ void main() {
         .thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
   });
 
+  group('shared', () {
+    test(
+      'Should throw ServerServer if invalid method is provided',
+      () async {
+        final future = sut.request(
+          url: url,
+          method: 'invalid_method',
+          body: {
+            "any_key": "any_value",
+          },
+        );
+
+        expect(future, throwsA(HttpError.serverError));
+      },
+    );
+  });
+
   group('post', () {
     PostExpectation mockRequest() => when(
         client.post(any, headers: anyNamed("headers"), body: anyNamed("body")));
