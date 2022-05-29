@@ -2,16 +2,18 @@ import 'dart:convert';
 
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tdd_study/data/http/http_client.dart';
 import 'package:http/http.dart';
 import 'package:mockito/mockito.dart';
 import 'package:test/test.dart';
 
-class HttpAdapter {
+class HttpAdapter implements HttpClient {
   final Client client;
 
   HttpAdapter(this.client);
 
-  Future<void> request({
+  @override
+  Future<Map> request({
     @required String url,
     @required String method,
     Map body,
@@ -21,7 +23,9 @@ class HttpAdapter {
       'accept': 'application/json'
     };
     final jsonBody = body != null ? jsonEncode(body) : null;
-    await client.post(Uri.parse(url), headers: headers, body: jsonBody);
+    final response = await client.post(Uri.parse(url), headers: headers, body: jsonBody);
+
+    return json.decode(response.body);
   }
 }
 
@@ -38,10 +42,10 @@ void main() {
     url = faker.internet.httpUrl();
   });
 
-  group('post', () {});
   test(
     'should call post without body',
     () async {
+      when(client.post(any, headers: anyNamed("headers"))).thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
       await sut.request(
         url: url,
         method: 'post',
@@ -58,6 +62,7 @@ void main() {
   test(
     'should call post with correct values',
     () async {
+      when(client.post(any, headers: anyNamed("headers"), body: anyNamed("body"))).thenAnswer((_) async => Response('{"any_key":"any_value"}', 200));
       await sut.request(
         url: url,
         method: 'post',
@@ -76,6 +81,20 @@ void main() {
           body: '{"any_key":"any_value"}',
         ),
       );
+    },
+  );
+
+    test(
+    'should return data if post returns 200',
+    () async {
+      when(client.post(any, headers: anyNamed("headers"))).thenAnswer((realInvocation) async => Response('{"any_key":"any_value"}', 200));
+
+      final response = await sut.request(
+        url: url,
+        method: 'post',
+      );
+
+      expect(response, {"any_key":"any_value"});
     },
   );
 }
