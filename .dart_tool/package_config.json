@@ -14,6 +14,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "archive",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/archive-3.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "args",
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/args-2.3.0",
       "packageUri": "lib/",
@@ -146,6 +152,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_launcher_icons",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_lints",
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
       "packageUri": "lib/",
@@ -186,6 +198,12 @@
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/http_parser-4.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "image",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/image-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
     },
     {
       "name": "io",
@@ -258,6 +276,12 @@
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/path-1.8.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/petitparser-5.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.16"
     },
     {
       "name": "pool",
@@ -404,6 +428,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/xml-6.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/yaml-3.1.0",
       "packageUri": "lib/",
@@ -416,7 +446,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-06-05T01:10:59.577022Z",
+  "generated": "2022-06-06T01:59:53.547921Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }
