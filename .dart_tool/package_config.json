@@ -27,9 +27,9 @@
     },
     {
       "name": "async",
-      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/async-2.8.2",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/async-2.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
     },
     {
       "name": "boolean_selector",
@@ -147,9 +147,9 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///Users/rafaelabrantes/fvm/versions/3.0.1/packages/flutter",
+      "rootUri": "file:///Users/rafaelabrantes/fvm/versions/3.1.0/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_launcher_icons",
@@ -165,7 +165,7 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///Users/rafaelabrantes/fvm/versions/3.0.1/packages/flutter_test",
+      "rootUri": "file:///Users/rafaelabrantes/fvm/versions/3.1.0/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -321,7 +321,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///Users/rafaelabrantes/fvm/versions/3.0.1/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/rafaelabrantes/fvm/versions/3.1.0/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -446,7 +446,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-06-06T01:59:53.547921Z",
+  "generated": "2022-07-06T02:13:28.996883Z",
   "generator": "pub",
-  "generatorVersion": "2.17.1"
+  "generatorVersion": "2.18.0-44.1.beta"
 }
