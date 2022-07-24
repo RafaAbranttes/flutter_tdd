@@ -23,13 +23,19 @@ class LoginPage extends StatelessWidget {
               child: Form(
                 child: Column(
                   children: [
-                    TextFormField(
-                      onChanged: presenter.validateEmail,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        icon: Icon(Icons.email),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
+                    StreamBuilder<String>(
+                      stream: presenter.emailErrorStream,
+                      builder: (context, snapshot) {
+                        return TextFormField(
+                          onChanged: presenter.validateEmail,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            icon: const Icon(Icons.email),
+                            errorText: snapshot.data,
+                          ),
+                          keyboardType: TextInputType.emailAddress,
+                        );
+                      },
                     ),
                     Padding(
                       padding: const EdgeInsets.only(
@@ -47,7 +53,9 @@ class LoginPage extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: null,
-                      child: Text('Entrar'.toUpperCase()),
+                      child: Text(
+                        'Entrar'.toUpperCase(),
+                      ),
                     ),
                     TextButton.icon(
                       onPressed: () {},

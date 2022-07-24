@@ -32,7 +32,6 @@ class App extends StatelessWidget {
             borderSide: BorderSide(
               color: primaryColorLight,
             ),
-            
           ),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(
@@ -44,7 +43,7 @@ class App extends StatelessWidget {
           hoverColor: primaryColor,
           fillColor: primaryColor,
           focusColor: primaryColor,
-           border: UnderlineInputBorder(
+          border: UnderlineInputBorder(
             borderSide: BorderSide(
               color: primaryColor,
             ),
