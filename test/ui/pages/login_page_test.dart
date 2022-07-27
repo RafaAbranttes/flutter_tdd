@@ -126,4 +126,44 @@ void main() {
       expect(find.text('any error'), findsOneWidget);
     },
   );
+
+  testWidgets(
+    "Sould present no error if password is valid",
+    (WidgetTester tester) async {
+      await loadPage(tester);
+
+      passwordErrorController.add(null);
+      await tester.pump();
+
+      final passwordChildren = find.descendant(
+        of: find.bySemanticsLabel("Senha"),
+        matching: find.byType(Text),
+      );
+
+      expect(
+        passwordChildren,
+        findsOneWidget,
+      );
+    },
+  );
+
+  testWidgets(
+    "Sould present no error if password is valid",
+    (WidgetTester tester) async {
+      await loadPage(tester);
+
+      passwordErrorController.add('');
+      await tester.pump();
+
+      final passwordChildren = find.descendant(
+        of: find.bySemanticsLabel("Senha"),
+        matching: find.byType(Text),
+      );
+
+      expect(
+        passwordChildren,
+        findsOneWidget,
+      );
+    },
+  );
 }
