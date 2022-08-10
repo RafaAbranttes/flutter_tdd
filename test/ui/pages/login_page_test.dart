@@ -75,7 +75,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould call validate with correct values",
+    "Should call validate with correct values",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -90,7 +90,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould present error if email is invalid",
+    "Should present error if email is invalid",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -102,7 +102,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould present no error if email is valid",
+    "Should present no error if email is valid",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -122,7 +122,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould present error if password is invalid",
+    "Should present error if password is invalid",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -154,7 +154,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould present no error if password is valid",
+    "Should present no error if password is valid",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -174,7 +174,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould enable button is form valid",
+    "Should enable button is form valid",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -187,7 +187,7 @@ void main() {
   );
 
   testWidgets(
-    "Sould not enable button is form invalid",
+    "Should not enable button is form invalid",
     (WidgetTester tester) async {
       await loadPage(tester);
 
@@ -196,6 +196,20 @@ void main() {
 
       final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       expect(button.onPressed, isNull);
+    },
+  );
+
+  testWidgets(
+    "Should call authentication on form submit",
+    (WidgetTester tester) async {
+      await loadPage(tester);
+
+      ifFormValidController.add(true);
+      await tester.pump();
+      await tester.tap(find.byType(ElevatedButton));
+      await tester.pump();
+
+      verify(presenter.auth()).called(1);
     },
   );
 }
