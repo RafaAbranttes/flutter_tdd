@@ -35,15 +35,7 @@ class _LoginPageState extends State<LoginPage> {
 
           widget.presenter.mainErrorStrem.listen((isError) {
             if (isError != null) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: Colors.red[900],
-                  content: Text(
-                    isError,
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              );
+              showErrorMessage(context, isError);
             }
           });
           return SingleChildScrollView(
