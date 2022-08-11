@@ -7,4 +7,5 @@ abstract class LoginPresenter {
   Stream get passwordErrorStream;
   Stream get isFormValidStream;
   Stream get isLoadingController;
+  Stream get mainErrorStrem;
 }
