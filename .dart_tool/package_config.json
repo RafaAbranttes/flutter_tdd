@@ -260,6 +260,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "nested",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "node_preamble",
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1",
       "packageUri": "lib/",
@@ -286,6 +292,12 @@
     {
       "name": "pool",
       "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/pool-1.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "provider",
+      "rootUri": "file:///Users/rafaelabrantes/.pub-cache/hosted/pub.dartlang.org/provider-6.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -446,7 +458,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2022-08-11T01:29:18.783464Z",
+  "generated": "2022-08-11T01:42:03.221551Z",
   "generator": "pub",
   "generatorVersion": "2.18.0-44.1.beta"
 }
