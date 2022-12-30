@@ -1,4 +1,1 @@
-class AccountEntity{
-
-
-}
+class AccountEntity {}
