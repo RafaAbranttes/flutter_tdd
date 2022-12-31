@@ -15,8 +15,4 @@ class AuthenticationParams {
     required this.password,
   });
 
-  Map toMap() => {
-        "email": email,
-        "password": password,
-      };
 }
