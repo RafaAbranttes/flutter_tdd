@@ -1,3 +1,5 @@
+import 'dart:js_interop';
+
 import 'package:faker/faker.dart';
 import 'package:flutter_tdd_study/data/http/http.dart';
 import 'package:flutter_tdd_study/data/usecases/usecases.dart';
@@ -18,7 +20,7 @@ void main() {
     url = faker.internet.httpUrl();
     sut = RemoteAuthentication(
       httpClient: httpClient ?? HttpClientSpy(),
-      url: url ?? "",
+      url: url!,
     );
     params = AuthenticationParams(
       email: faker.internet.email(),
@@ -49,6 +51,21 @@ void main() {
         body: anyNamed('body'),
       ),
     ).thenThrow(HttpError.badRequest);
+    final future = sut?.auth(
+      authenticationParams: params!,
+    );
+
+    expect(future, throwsA(DomainError.unexpected));
+  });
+
+  test("Should throw UnexpectedError if HttpCliente returns 404", () async {
+    when(
+      httpClient?.request(
+        url : anyNamed('url').toString(),
+        method: anyNamed('method').toString(),
+        body: anyNamed('body'),
+      ),
+    ).thenThrow(HttpError.notFound);
     final future = sut?.auth(
       authenticationParams: params!,
     );
