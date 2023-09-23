@@ -1,6 +1,6 @@
 import 'package:faker/faker.dart';
 import 'package:flutter_tdd_study/data/http/http.dart';
-import 'package:flutter_tdd_study/data/usecases/usercases.dart';
+import 'package:flutter_tdd_study/data/usecases/usecases.dart';
 import 'package:flutter_tdd_study/domain/usecases/usecases.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

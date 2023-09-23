@@ -1,5 +1,3 @@
-import 'package:flutter_tdd_study/domain/entities/entities.dart';
-
 import '../../domain/usecases/usecases.dart';
 import '../http/http.dart';
 
