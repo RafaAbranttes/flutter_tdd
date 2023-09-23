@@ -1,6 +1,6 @@
-import '../entities/entities.dart';
+import 'package:flutter_tdd_study/domain/entities/entities.dart';
 
-abstract class Authenticaction {
+abstract class Authentication {
   Future<AccountEntity> auth({
     required AuthenticationParams authenticationParams,
   });

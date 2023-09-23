@@ -1,5 +1,5 @@
-import '../../domain/usecases/usecases.dart';
-import '../http/http.dart';
+import 'package:flutter_tdd_study/data/http/http.dart';
+import 'package:flutter_tdd_study/domain/domain.dart';
 
 class RemoteAuthentication {
   final HttpClient httpClient;
@@ -15,11 +15,15 @@ class RemoteAuthentication {
   }) async {
     final body =
         RemoteAuthenticationParams.fromDomain(authenticationParams).toMap();
-    await httpClient.request(
-      url: url,
-      method: 'post',
-      body: body,
-    );
+    try {
+      await httpClient.request(
+        url: url,
+        method: 'post',
+        body: body,
+      );
+    } on HttpError {
+      throw DomainError.unexpected;
+    }
   }
 }
 
@@ -33,7 +37,8 @@ class RemoteAuthenticationParams {
   });
 
   factory RemoteAuthenticationParams.fromDomain(
-          AuthenticationParams authenticationParams) =>
+    AuthenticationParams authenticationParams,
+  ) =>
       RemoteAuthenticationParams(
         email: authenticationParams.email,
         password: authenticationParams.password,
