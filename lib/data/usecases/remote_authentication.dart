@@ -2,7 +2,7 @@ import 'package:flutter_tdd_study/data/http/http.dart';
 import 'package:flutter_tdd_study/data/models/models.dart';
 import 'package:flutter_tdd_study/domain/domain.dart';
 
-class RemoteAuthentication {
+class RemoteAuthentication implements Authentication{
   final HttpClient httpClient;
   final String url;
 
@@ -11,6 +11,7 @@ class RemoteAuthentication {
     required this.url,
   });
 
+  @override
   Future<AccountEntity> auth({
     required AuthenticationParams authenticationParams,
   }) async {
