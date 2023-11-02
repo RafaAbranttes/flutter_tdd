@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:faker/faker.dart';
 import 'package:flutter_tdd_study/data/http/http.dart';
 import 'package:flutter_tdd_study/data/usecases/usecases.dart';
@@ -58,7 +56,22 @@ void main() {
     expect(future, throwsA(DomainError.unexpected));
   });
 
-  test("Should throw UnexpectedError if HttpCliente returns 404", () async {
+  test("Should throw Invalid if HttpCliente returns 401", () async {
+    when(
+      httpClient?.request(
+        url : anyNamed('url').toString(),
+        method: anyNamed('method').toString(),
+        body: anyNamed('body'),
+      ),
+    ).thenThrow(HttpError.unauthorized);
+    final future = sut?.auth(
+      authenticationParams: params!,
+    );
+
+    expect(future, throwsA(DomainError.invalidCredentials));
+  });
+
+  test("Should throw Invalid if HttpCliente returns 404", () async {
     when(
       httpClient?.request(
         url : anyNamed('url').toString(),
@@ -70,7 +83,7 @@ void main() {
       authenticationParams: params!,
     );
 
-    expect(future, throwsA(DomainError.unexpected));
+    expect(future, throwsA(DomainError.badRequest));
   });
 
   test("Should throw UnexpectedError if HttpCliente returns 500", () async {
