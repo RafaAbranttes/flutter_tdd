@@ -10,17 +10,18 @@ class RemoteAuthentication {
     required this.url,
   });
 
-  Future<void> auth({
+  Future<AccountEntity> auth({
     required AuthenticationParams authenticationParams,
   }) async {
     final body =
         RemoteAuthenticationParams.fromDomain(authenticationParams).toMap();
     try {
-      await httpClient.request(
+     final httpResponse = await httpClient.request(
         url: url,
         method: 'post',
         body: body,
       );
+      return AccountEntity.fromJson(httpResponse);
     } on HttpError catch (error) {
       throw error == HttpError.unauthorized
           ? DomainError.invalidCredentials

@@ -27,7 +27,19 @@ void main() {
   });
 
   test("Should call HttpClient with correct values", () async {
-   
+    when(
+      httpClient?.request(
+        url: anyNamed('url').toString(),
+        method: anyNamed('method').toString(),
+        body: anyNamed('body'),
+      ),
+    ).thenAnswer(
+      (_) async => {
+        'accessToken': faker.guid.guid(),
+        'name': faker.person.name(),
+      },
+    );
+
     await sut?.auth(
       authenticationParams: params!,
     );
@@ -59,7 +71,7 @@ void main() {
   test("Should throw Invalid if HttpCliente returns 401", () async {
     when(
       httpClient?.request(
-        url : anyNamed('url').toString(),
+        url: anyNamed('url').toString(),
         method: anyNamed('method').toString(),
         body: anyNamed('body'),
       ),
@@ -71,10 +83,31 @@ void main() {
     expect(future, throwsA(DomainError.invalidCredentials));
   });
 
+  test("Should return an Account if HttpCliente returns 200", () async {
+    final accessToken = faker.guid.guid();
+    when(
+      httpClient?.request(
+        url: anyNamed('url').toString(),
+        method: anyNamed('method').toString(),
+        body: anyNamed('body'),
+      ),
+    ).thenAnswer(
+      (_) async => {
+        'accessToken': accessToken,
+        'name': faker.person.name(),
+      },
+    );
+    final account = await sut?.auth(
+      authenticationParams: params!,
+    );
+
+    expect(account?.token, accessToken);
+  });
+
   test("Should throw Invalid if HttpCliente returns 404", () async {
     when(
       httpClient?.request(
-        url : anyNamed('url').toString(),
+        url: anyNamed('url').toString(),
         method: anyNamed('method').toString(),
         body: anyNamed('body'),
       ),
@@ -89,7 +122,7 @@ void main() {
   test("Should throw UnexpectedError if HttpCliente returns 500", () async {
     when(
       httpClient?.request(
-        url : anyNamed('url').toString(),
+        url: anyNamed('url').toString(),
         method: anyNamed('method').toString(),
         body: anyNamed('body'),
       ),
