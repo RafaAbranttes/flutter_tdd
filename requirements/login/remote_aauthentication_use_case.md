@@ -4,9 +4,9 @@
 
 1. ✅ Sistema valida os dados.
 2. ✅ Sistema valida os dados.
-3. Sistema faz uma requisição para a URL da API de login.
-4. Sistema valida os dados recebidos da API.
-5. Sistema entrega os dados da conta do usuário.
+3. ✅ Sistema faz uma requisição para a URL da API de login.
+4. ✅ Sistema valida os dados recebidos da API.
+5. ✅ Sistema entrega os dados da conta do usuário.
 
 > ## Exceção - URL inválida
 
@@ -26,4 +26,4 @@
 
 > ## Exceção - Credenciais inválidas
 
-1. Sistema retorna uma mensagem de erro informando que as credenciais estão erradas
+1. ✅ Sistema retorna uma mensagem de erro informando que as credenciais estão erradas
