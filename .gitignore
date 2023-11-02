@@ -132,3 +132,6 @@ app.*.symbols
 .fvm
 #flutter fvm
 .fvm/flutter_sdk
+
+#Dart tool
+.dart_tool
