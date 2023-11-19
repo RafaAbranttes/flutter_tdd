@@ -17,6 +17,24 @@ void main() {
     sut = HttpAdapter(client: client ?? ClientSpy());
     url = faker.internet.httpUrl();
   });
+
+  group('shared', () {
+    test(
+      'Should throw serverError if invalid method is provided',
+      () async {
+        final future = sut?.request(
+          url: url ?? '',
+          method: 'invalid_method',
+        );
+
+        expect(
+          future,
+          throwsA(HttpError.serverError),
+        );
+      },
+    );
+  });
+
   group(
     'post',
     () {
@@ -139,7 +157,7 @@ void main() {
         () async {
           mockResponse(statusCode: 400, body: '');
 
-          final future =  sut?.request(
+          final future = sut?.request(
             url: url ?? '',
             method: 'post',
           );
@@ -156,7 +174,7 @@ void main() {
         () async {
           mockResponse(statusCode: 400);
 
-          final future =  sut?.request(
+          final future = sut?.request(
             url: url ?? '',
             method: 'post',
           );
@@ -173,7 +191,7 @@ void main() {
         () async {
           mockResponse(statusCode: 401);
 
-          final future =  sut?.request(
+          final future = sut?.request(
             url: url ?? '',
             method: 'post',
           );
@@ -190,7 +208,7 @@ void main() {
         () async {
           mockResponse(statusCode: 403);
 
-          final future =  sut?.request(
+          final future = sut?.request(
             url: url ?? '',
             method: 'post',
           );
@@ -207,7 +225,7 @@ void main() {
         () async {
           mockResponse(statusCode: 404);
 
-          final future =  sut?.request(
+          final future = sut?.request(
             url: url ?? '',
             method: 'post',
           );
@@ -224,7 +242,7 @@ void main() {
         () async {
           mockResponse(statusCode: 500);
 
-          final future =  sut?.request(
+          final future = sut?.request(
             url: url ?? '',
             method: 'post',
           );
