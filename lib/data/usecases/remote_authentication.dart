@@ -2,7 +2,7 @@ import 'package:flutter_tdd_study/data/http/http.dart';
 import 'package:flutter_tdd_study/data/models/models.dart';
 import 'package:flutter_tdd_study/domain/domain.dart';
 
-class RemoteAuthentication implements Authentication{
+class RemoteAuthentication implements Authentication {
   final HttpClient httpClient;
   final String url;
 
@@ -23,13 +23,14 @@ class RemoteAuthentication implements Authentication{
         method: 'post',
         body: body,
       );
-      return RemoteAccountModel.fromJson(httpResponse ?? <dynamic, dynamic>{}).toEntity();
+      return RemoteAccountModel.fromJson(httpResponse ?? <dynamic, dynamic>{})
+          .toEntity();
     } on HttpError catch (error) {
       throw error == HttpError.unauthorized
           ? DomainError.invalidCredentials
           : DomainError.unexpected;
     }
-  } 
+  }
 }
 
 class RemoteAuthenticationParams {
