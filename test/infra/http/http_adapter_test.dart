@@ -26,10 +26,13 @@ class HttpAdapter implements HttpClient {
       headers: headers,
       body: jsonEncode(body),
     );
-
-    return response?.body == null
-        ? null
-        : jsonDecode(response?.body ?? "") as Map?;
+    if (response?.statusCode == 200) {
+      return response?.body == null
+          ? null
+          : jsonDecode(response?.body ?? "") as Map?;
+    } else {
+      return null;
+    }
   }
 }
 
@@ -132,6 +135,23 @@ void main() {
         'Should return null if post returns 204',
         () async {
           mockResponse(statusCode: 204, body: '');
+
+          final response = await sut?.request(
+            url: url ?? '',
+            method: 'post',
+          );
+
+          expect(
+            response,
+            null,
+          );
+        },
+      );
+
+      test(
+        'Should return null if post returns 204 with data',
+        () async {
+          mockResponse(statusCode: 204);
 
           final response = await sut?.request(
             url: url ?? '',
