@@ -186,6 +186,40 @@ void main() {
       );
 
       test(
+        'Should return ForbiddenError if post returns 403',
+        () async {
+          mockResponse(statusCode: 403);
+
+          final future =  sut?.request(
+            url: url ?? '',
+            method: 'post',
+          );
+
+          expect(
+            future,
+            throwsA(HttpError.forbidden),
+          );
+        },
+      );
+
+      test(
+        'Should return notFoundError if post returns 404',
+        () async {
+          mockResponse(statusCode: 404);
+
+          final future =  sut?.request(
+            url: url ?? '',
+            method: 'post',
+          );
+
+          expect(
+            future,
+            throwsA(HttpError.notFound),
+          );
+        },
+      );
+
+      test(
         'Should return ServerError if post returns 500',
         () async {
           mockResponse(statusCode: 500);
