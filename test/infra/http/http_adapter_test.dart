@@ -27,7 +27,9 @@ class HttpAdapter implements HttpClient {
       body: jsonEncode(body),
     );
 
-    return response?.body == null ? null : jsonDecode(response?.body ?? "") as Map?;
+    return response?.body == null
+        ? null
+        : jsonDecode(response?.body ?? "") as Map?;
   }
 }
 
@@ -46,22 +48,31 @@ void main() {
   group(
     'post',
     () {
-      test(
-        'Should call post with correct values',
-        () async {
-          when(
+      PostExpectation mockRequest() => when(
             client?.post(
               Uri.parse(url ?? ''),
               body: anyNamed('body'),
               headers: anyNamed('headers'),
             ),
-          ).thenAnswer(
-            (_) async => Response(
-              '{"any_key":"any_value"}',
-              200,
-            ),
           );
+      void mockResponse({
+        required int statusCode,
+        String body = '{"any_key":"any_value"}',
+      }) {
+        mockRequest().thenAnswer(
+          (_) async => Response(
+            body,
+            200,
+          ),
+        );
+      }
 
+      setUp(() {
+        mockResponse(statusCode: 200);
+      });
+      test(
+        'Should call post with correct values',
+        () async {
           await sut?.request(
             url: url ?? '',
             method: 'post',
@@ -86,18 +97,6 @@ void main() {
       test(
         'Should return data if post returns 200',
         () async {
-          when(
-            client?.post(
-              Uri.parse(url ?? ''),
-              headers: anyNamed('headers'),
-            ),
-          ).thenAnswer(
-            (_) async => Response(
-              '{"any_key":"any_value"}',
-              200,
-            ),
-          );
-
           final response = await sut?.request(
             url: url ?? '',
             method: 'post',
@@ -115,17 +114,7 @@ void main() {
       test(
         'Should return null if post returns 200 with no data',
         () async {
-          when(
-            client?.post(
-              Uri.parse(url ?? ''),
-              headers: anyNamed('headers'),
-            ),
-          ).thenAnswer(
-            (_) async => Response(
-              '',
-              200,
-            ),
-          );
+          mockResponse(statusCode: 200, body: '');
 
           final response = await sut?.request(
             url: url ?? '',
