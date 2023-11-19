@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:flutter_tdd_study/data/http/http_error.dart';
 import 'package:flutter_tdd_study/infra/http/http.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
@@ -129,6 +130,23 @@ void main() {
           expect(
             response,
             null,
+          );
+        },
+      );
+
+      test(
+        'Should return BadRequestError if post returns 400',
+        () async {
+          mockResponse(statusCode: 400);
+
+          final future =  sut?.request(
+            url: url ?? '',
+            method: 'post',
+          );
+
+          expect(
+            future,
+            throwsA(HttpError.badRequest),
           );
         },
       );
