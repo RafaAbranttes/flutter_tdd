@@ -3,18 +3,18 @@ import 'package:flutter_tdd_study/data/http/http_error.dart';
 import 'package:flutter_tdd_study/infra/http/http.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class ClientSpy extends Mock implements Client {}
 
 void main() {
-  ClientSpy? client;
-  HttpAdapter? sut;
-  String? url;
+  late ClientSpy client;
+  late HttpAdapter sut;
+  late String url;
 
   setUp(() {
     client = ClientSpy();
-    sut = HttpAdapter(client: client ?? ClientSpy());
+    sut = HttpAdapter(client: client);
     url = faker.internet.httpUrl();
   });
 
@@ -22,8 +22,8 @@ void main() {
     test(
       'Should throw serverError if invalid method is provided',
       () async {
-        final future = sut?.request(
-          url: url ?? '',
+        final future = sut.request(
+          url: url,
           method: 'invalid_method',
         );
 
@@ -38,11 +38,11 @@ void main() {
   group(
     'post',
     () {
-      PostExpectation mockRequest() => when(
-            client?.post(
-              Uri.parse(url ?? ''),
-              body: anyNamed('body'),
-              headers: anyNamed('headers'),
+      When mockRequest() => when(
+            () => client.post(
+              Uri.parse(url),
+              body: any(named: 'body'),
+              headers: any(named: 'headers'),
             ),
           );
       void mockResponse({
@@ -52,12 +52,12 @@ void main() {
         mockRequest().thenAnswer(
           (_) async => Response(
             body,
-            200,
+            statusCode,
           ),
         );
       }
 
-       void mockError() {
+      void mockError() {
         mockRequest().thenThrow(
           Exception(),
         );
@@ -69,8 +69,8 @@ void main() {
       test(
         'Should call post with correct values',
         () async {
-          await sut?.request(
-            url: url ?? '',
+          await sut.request(
+            url: url,
             method: 'post',
             body: {
               'any_key': 'any_value',
@@ -78,8 +78,8 @@ void main() {
           );
 
           verify(
-            client?.post(
-              Uri.parse(url ?? ''),
+            () => client.post(
+              Uri.parse(url),
               headers: {
                 'content-type': 'application/json',
                 'accept': 'application/json',
@@ -93,8 +93,8 @@ void main() {
       test(
         'Should return data if post returns 200',
         () async {
-          final response = await sut?.request(
-            url: url ?? '',
+          final response = await sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -112,8 +112,8 @@ void main() {
         () async {
           mockResponse(statusCode: 200, body: '');
 
-          final response = await sut?.request(
-            url: url ?? '',
+          final response = await sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -129,8 +129,8 @@ void main() {
         () async {
           mockResponse(statusCode: 204, body: '');
 
-          final response = await sut?.request(
-            url: url ?? '',
+          final response = await sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -146,8 +146,8 @@ void main() {
         () async {
           mockResponse(statusCode: 204);
 
-          final response = await sut?.request(
-            url: url ?? '',
+          final response = await sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -163,8 +163,8 @@ void main() {
         () async {
           mockResponse(statusCode: 400, body: '');
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -180,8 +180,8 @@ void main() {
         () async {
           mockResponse(statusCode: 400);
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -197,8 +197,8 @@ void main() {
         () async {
           mockResponse(statusCode: 401);
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -214,8 +214,8 @@ void main() {
         () async {
           mockResponse(statusCode: 403);
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -231,8 +231,8 @@ void main() {
         () async {
           mockResponse(statusCode: 404);
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -248,8 +248,8 @@ void main() {
         () async {
           mockResponse(statusCode: 500);
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 
@@ -265,8 +265,8 @@ void main() {
         () async {
           mockError();
 
-          final future = sut?.request(
-            url: url ?? '',
+          final future = sut.request(
+            url: url,
             method: 'post',
           );
 

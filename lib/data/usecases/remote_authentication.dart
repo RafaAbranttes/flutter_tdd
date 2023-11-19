@@ -29,7 +29,7 @@ class RemoteAuthentication implements Authentication{
           ? DomainError.invalidCredentials
           : DomainError.unexpected;
     }
-  }
+  } 
 }
 
 class RemoteAuthenticationParams {

@@ -3,26 +3,26 @@ import 'package:flutter_tdd_study/data/http/http.dart';
 import 'package:flutter_tdd_study/data/usecases/usecases.dart';
 import 'package:flutter_tdd_study/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class HttpClientSpy extends Mock implements HttpClient {}
 
 void main() {
-  HttpClientSpy? httpClient;
-  String? url;
-  RemoteAuthentication? sut;
-  AuthenticationParams? params;
+  late HttpClientSpy? httpClient;
+  late String? url;
+  late RemoteAuthentication? sut;
+  late AuthenticationParams? params;
 
   Map mockValidData() => {
         'accessToken': faker.guid.guid(),
         'name': faker.person.name(),
       };
 
-  PostExpectation mockRequest() => when(
+  When mockRequest() => when(() =>
         httpClient?.request(
-          url: anyNamed('url').toString(),
-          method: anyNamed('method').toString(),
-          body: anyNamed('body'),
+          url: any(named: 'url'),
+          method: any(named: 'method'),
+          body: any(named: 'body'),
         ),
       );
 
@@ -57,7 +57,7 @@ void main() {
       authenticationParams: params!,
     );
 
-    verify(
+    verify(() =>
       httpClient?.request(
         url: url ?? "",
         method: 'post',
@@ -100,7 +100,7 @@ void main() {
       authenticationParams: params!,
     );
 
-    expect(future, throwsA(DomainError.badRequest));
+    expect(future, throwsA(DomainError.unexpected));
   });
 
   test("Should throw UnexpectedError if HttpCliente returns 500", () async {

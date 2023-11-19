@@ -35,9 +35,9 @@ class HttpAdapter implements HttpClient {
 
   Map? _handleResponse(Response? response) {
     if (response?.statusCode == 200) {
-      return response?.body == null
+      return response?.body == ""
           ? null
-          : jsonDecode(response?.body ?? "") as Map?;
+          : jsonDecode(response?.body ?? "") as Map<dynamic, dynamic>?;
     } else if (response?.statusCode == 204) {
       return null;
     } else if (response?.statusCode == 400) {
