@@ -31,10 +31,14 @@ class HttpAdapter implements HttpClient {
       return response?.body == null
           ? null
           : jsonDecode(response?.body ?? "") as Map?;
-    } else if(response?.statusCode == 204){
+    } else if (response?.statusCode == 204) {
       return null;
-    } else {
+    } else if (response?.statusCode == 400) {
       throw HttpError.badRequest;
+    } else if (response?.statusCode == 401) {
+      throw HttpError.unauthorized;
+    } else {
+      throw HttpError.serverError;
     }
   }
 }
